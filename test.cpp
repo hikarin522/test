@@ -1,33 +1,38 @@
+// test.cpp
+// hikari
 
-#include <boost/version.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
+#include <boost/version.hpp>
 #include <boost/format.hpp>
 
 using namespace std;
 using namespace boost;
 
-auto f(){ return 100'000'000; }
+auto f()
+{
+	return 100'000'000;
+}
 
 int main(int argc, char *argv[], char *envp[])
 {
-	vector<string> argstr(argv, argv + argc);;
+	vector<string> argstr(argv, argv + argc);
 	vector<string> envstr(envp, [](char *i[]){while (*++i); return i;}(envp));
 	decltype(auto) y = f();
-	cout << format("‚Í‚ë[ %1%\n\n") % y;
+	cout << format("ï¿½Í‚ï¿½[ %1%\n\n") % y;
 
-	cout << format("Boost version : %1%.%2%.%3%\n\n") % (BOOST_VERSION / 100000) % (BOOST_VERSION / 100 % 1000) % (BOOST_VERSION % 100);
+	cout << format("Boost version : %1%.%2%.%3%\n\n") % (BOOST_VERSION / 100'000) % (BOOST_VERSION / 100 % 1'000) % (BOOST_VERSION % 100);
 
-	cout << format("ƒRƒ}ƒ“ƒhƒ‰ƒCƒ“ˆø”\n");
+	cout << format("ï¿½Rï¿½}ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\n");
 	for (auto &i : argstr)
 		cout << format("%1%\n") % i;
 
-	cout << format("\nŠÂ‹«•Ï”\n");
+	cout << format("\nï¿½Â‹ï¿½ï¿½Ïï¿½\n");
 	for (auto &i : envstr)
 		cout << format("%1%\n") % i;
 
-	cout << format("\n‚¨‚í‚è\n");
+	cout << format("\nï¿½ï¿½ï¿½ï¿½ï¿½\n");
 
 	cin >> argstr[0];
 	return 0;
