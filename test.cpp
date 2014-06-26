@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+
 #include <boost/version.hpp>
 #include <boost/format.hpp>
 
@@ -19,20 +20,21 @@ int main(int argc, char *argv[], char *envp[])
 {
 	vector<string> argstr(argv, argv + argc);
 	vector<string> envstr(envp, [](char *i[]){while (*++i); return i;}(envp));
+
 	decltype(auto) y = f();
-	cout << format("�͂�[ %1%\n\n") % y;
+	cout << format("はろー %1%\n\n") % y;
 
 	cout << format("Boost version : %1%.%2%.%3%\n\n") % (BOOST_VERSION / 100'000) % (BOOST_VERSION / 100 % 1'000) % (BOOST_VERSION % 100);
 
-	cout << format("�R�}���h���C������\n");
+	cout << format("コマンドライン引数\n");
 	for (auto &i : argstr)
 		cout << format("%1%\n") % i;
 
-	cout << format("\n���ϐ�\n");
+	cout << format("\n環境変数\n");
 	for (auto &i : envstr)
 		cout << format("%1%\n") % i;
 
-	cout << format("\n�����\n");
+	cout << format("\nおわり\n");
 
 	cin >> argstr[0];
 	return 0;
