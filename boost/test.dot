@@ -1,0 +1,12 @@
+digraph G {
+0[label=Tokyo];
+1[label=Nagoya];
+2[label=Osaka];
+3[label=Kobe];
+4[label=Kanku];
+0->1 ;
+1->3 ;
+0->4 ;
+3->2 ;
+4->2 ;
+}
