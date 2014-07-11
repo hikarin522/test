@@ -246,6 +246,8 @@ namespace parser_impl
             pow = fctr[_val = _1] >> *( '^' >> pow[_val = make_binary_operator<operators::pow>()]);
 
             fctr = double_[_val = _1]
+            	| lit("pi")[_val = std::atan(1) * 4]
+            	| lit('e')[_val = std::exp(1)]
                 | '(' >> expr[_val = _1] >> ')'
                 | "sqrt" >> fctr[_val = make_unary_operator<operators::sqrt>()]
                 | "exp" >> fctr[_val = make_unary_operator<operators::exp>()]
