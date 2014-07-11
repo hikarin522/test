@@ -87,6 +87,7 @@ struct unary_operator {
 
 struct calculator : public boost::static_visitor<double>
 {
+
     double operator() (double const constant) const
     {
         return constant;
@@ -210,16 +211,19 @@ template<operators Op>
 auto make_binary_operator()
 {
     return boost::phoenix::bind(
-        [](auto const& lhs, auto const& rhs)
-        {
-            return binary_operator<Op>(lhs, rhs);
-        }, boost::spirit::_val, boost::spirit::_1);
+        [](auto const& lhs, auto const& rhs){
+            return binary_operator<Op>(lhs, rhs);},
+        boost::spirit::_val,
+        boost::spirit::_1);
 }
 
 template<operators Op>
 auto make_unary_operator()
 {
-    return boost::phoenix::bind([](auto const& e){ return unary_operator<Op>(e); }, boost::spirit::_1);
+    return boost::phoenix::bind(
+        [](auto const& e){
+            return unary_operator<Op>(e);},
+        boost::spirit::_1);
 }
 
 namespace parser_impl
