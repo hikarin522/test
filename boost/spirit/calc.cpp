@@ -233,8 +233,7 @@ namespace parser_impl
     template<typename Iterator>
     struct expr_grammer : qi::grammar<Iterator, expression(), ascii::space_type>
     {
-        qi::rule<Iterator, expression(), ascii::space_type> expr, term, fctr;
-        qi::rule<Iterator, expression(), ascii::space_type> pow;
+        qi::rule<Iterator, expression(), ascii::space_type> expr, term, fctr, pow;
 
         expr_grammer() : expr_grammer::base_type(expr)
         {
@@ -251,10 +250,10 @@ namespace parser_impl
 
             fctr = double_[_val = _1]
             	| lit("pi")[_val = std::atan(1) * 4]
-            	| lit('e')[_val = std::exp(1)]
                 | '(' >> expr[_val = _1] >> ')'
                 | "sqrt" >> fctr[_val = make_unary_operator<operators::sqrt>()]
                 | "exp" >> fctr[_val = make_unary_operator<operators::exp>()]
+                | lit('e')[_val = std::exp(1)]
                 | "log" >> fctr[_val = make_unary_operator<operators::log>()]
                 | "ln" >> fctr[_val = make_unary_operator<operators::ln>()]
                 | "sin" >> fctr[_val = make_unary_operator<operators::sin>()]
